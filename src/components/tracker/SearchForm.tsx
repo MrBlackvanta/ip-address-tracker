@@ -2,10 +2,10 @@
 
 import { ArrowIcon } from "@/components/icons";
 
-import { useTracker } from "./TrackerProvider";
+import { LOOKUP_ERROR_ID, useTracker } from "./TrackerProvider";
 
 export default function SearchForm() {
-  const { lookup } = useTracker();
+  const { lookup, error } = useTracker();
 
   function handleSubmit(
     event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>,
@@ -30,6 +30,8 @@ export default function SearchForm() {
         type="text"
         autoComplete="off"
         spellCheck={false}
+        aria-invalid={Boolean(error) || undefined}
+        aria-describedby={error ? LOOKUP_ERROR_ID : undefined}
         placeholder="Search for any IP address or domain"
         className="min-w-0 flex-1 overflow-hidden pr-4 pl-6 text-field text-ellipsis text-ink placeholder:text-muted focus-visible:outline-hidden"
       />

@@ -74,6 +74,7 @@ export function lookupVisitor(request: IncomingRequest): LookupResult | null {
   const { cf } = request;
   const ip = request.headers.get("CF-Connecting-IP");
   if (!cf || !ip) return null;
+  if (cf.latitude === undefined || cf.longitude === undefined) return null;
 
   return {
     ip,
@@ -82,7 +83,7 @@ export function lookupVisitor(request: IncomingRequest): LookupResult | null {
     postalCode: cf.postalCode ?? "",
     timezoneOffset: cf.timezone ? offsetFor(cf.timezone) : "",
     isp: cf.asOrganization ?? "",
-    lat: Number(cf.latitude ?? 0),
-    lng: Number(cf.longitude ?? 0),
+    lat: Number(cf.latitude),
+    lng: Number(cf.longitude),
   };
 }

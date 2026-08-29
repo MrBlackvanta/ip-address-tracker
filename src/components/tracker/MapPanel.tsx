@@ -19,7 +19,7 @@ function centreBelowCard(
   lat: number,
   lng: number,
 ) {
-  const card = node.parentElement?.querySelector("section");
+  const card = node.parentElement?.querySelector("[data-details-card]");
   const overlap = card
     ? Math.max(
         0,

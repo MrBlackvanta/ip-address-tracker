@@ -31,6 +31,13 @@ against no quota. ipify is called only when someone types a query, and identical
 back from `caches.default` — measured at 424ms cold and 12ms warm. Input is validated in the
 Worker before anything is forwarded, so an invalid query costs nothing either.
 
+The cache is not a defence against abuse, though, because it is keyed on the query: unique queries
+never hit it, so an unthrottled endpoint would let a `curl` loop spend the whole month in about two
+minutes and break search for real visitors. A rate limiting binding caps each client IP at **20
+lookups a minute**, and it sits _after_ the cache check and _before_ the upstream call, so it guards
+the thing that is actually scarce. A cached repeat is free and never counted; only a request about
+to spend quota is. Over the limit returns **429**, which the client surfaces like any other error.
+
 Two things about ipify worth writing down:
 
 - **It answers `400` for a domain it cannot resolve**, not 404 or 422. So `403` and `5xx` map to a
@@ -98,6 +105,18 @@ actually see. At 375 that lands the pin tip at y=645 against the design's 644.
 
 Both of those were found by running axe — the engine Lighthouse embeds — against the production
 build at Lighthouse's own two viewports. It now reports no violations at either.
+
+### Announcing errors, and the repeat that used to be silent
+
+The error is a `role="alert"`, which only announces when its content actually changes. Submitting
+the same bad query twice produced identical text, so React kept the very same DOM node untouched
+and a screen reader said nothing the second time — confirmed in the browser by tagging the node and
+watching the tag survive the second failure. Each failure now carries an incrementing id used as the
+element's `key`, so React remounts it and the live region fires every time.
+
+The message renders in the details card, a long way from the field that caused it, so the input
+carries `aria-invalid` and an `aria-describedby` pointing at it while an error is live. Both clear
+on the next success.
 
 ### Shadows
 

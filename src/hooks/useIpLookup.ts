@@ -8,6 +8,7 @@ import type { LookupResult } from "@/lib";
 type State = {
   result: LookupResult | null;
   error: string | null;
+  errorId: number;
   isPending: boolean;
 };
 
@@ -18,16 +19,26 @@ type Action =
 
 export type Tracker = State & { lookup: (query: string) => void };
 
-const initialState: State = { result: null, error: null, isPending: true };
+const initialState: State = {
+  result: null,
+  error: null,
+  errorId: 0,
+  isPending: true,
+};
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case "started":
       return state.isPending ? state : { ...state, isPending: true };
     case "resolved":
-      return { result: action.result, error: null, isPending: false };
+      return { ...state, result: action.result, error: null, isPending: false };
     case "failed":
-      return { ...state, error: action.error, isPending: false };
+      return {
+        ...state,
+        error: action.error,
+        errorId: state.errorId + 1,
+        isPending: false,
+      };
   }
 }
 

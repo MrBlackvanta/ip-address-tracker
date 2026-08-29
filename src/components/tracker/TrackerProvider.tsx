@@ -6,6 +6,8 @@ import type { ReactNode } from "react";
 import { useIpLookup } from "@/hooks";
 import type { Tracker } from "@/hooks";
 
+export const LOOKUP_ERROR_ID = "lookup-error";
+
 const TrackerContext = createContext<Tracker | null>(null);
 
 export function useTracker() {

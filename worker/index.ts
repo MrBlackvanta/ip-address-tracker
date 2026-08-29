@@ -4,7 +4,7 @@ import type { IncomingRequest } from "./lookup";
 import { parseQuery, queryValue } from "./query";
 import type { Query } from "./query";
 
-type Env = { IPIFY_API_KEY: string };
+type Env = { IPIFY_API_KEY: string; LOOKUP_LIMIT: RateLimit };
 
 const CACHE_FOR_A_DAY = "public, max-age=86400";
 
@@ -18,6 +18,14 @@ function json(body: unknown, status = 200, cacheControl = "no-store") {
   });
 }
 
+async function ensureQuota(request: IncomingRequest, env: Env) {
+  const key = request.headers.get("CF-Connecting-IP") ?? "anonymous";
+  const { success } = await env.LOOKUP_LIMIT.limit({ key });
+  if (!success) {
+    throw new LookupError(429, "Too many lookups. Try again in a minute.");
+  }
+}
+
 async function visitorResult(
   request: IncomingRequest,
   env: Env,
@@ -25,17 +33,19 @@ async function visitorResult(
   const visitor = lookupVisitor(request);
   if (visitor) return visitor;
 
+  await ensureQuota(request, env);
   const ip = request.headers.get("CF-Connecting-IP");
   return geolocate(ip ? { ipAddress: ip } : null, env.IPIFY_API_KEY);
 }
 
 async function cachedResult(
   query: Query,
-  origin: string,
+  request: IncomingRequest,
   env: Env,
   context: ExecutionContext,
 ) {
   const cache = caches.default;
+  const { origin } = new URL(request.url);
   const key = new Request(
     `${origin}/api/lookup?q=${encodeURIComponent(queryValue(query))}`,
   );
@@ -43,6 +53,7 @@ async function cachedResult(
   const cached = await cache.match(key);
   if (cached) return cached;
 
+  await ensureQuota(request, env);
   const result = await geolocate(query, env.IPIFY_API_KEY);
   const response = json(result, 200, CACHE_FOR_A_DAY);
   context.waitUntil(cache.put(key, response.clone()));
@@ -67,7 +78,7 @@ export default {
       if (!query) {
         return json({ error: "Enter a valid IP address or domain." }, 400);
       }
-      return await cachedResult(query, url.origin, env, context);
+      return await cachedResult(query, request, env, context);
     } catch (error) {
       if (error instanceof LookupError) {
         return json({ error: error.message }, error.status);
