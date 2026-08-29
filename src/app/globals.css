@@ -9,6 +9,7 @@
   --color-button-hover: #3f3f3f;
   --color-banner-from: #5f86f2;
   --color-banner-to: #443d97;
+  --color-error: #c5221f;
 
   --text-title: 1.625rem;
   --text-title--line-height: 1.875rem;
@@ -53,5 +54,20 @@
 @utility v-focus-ring {
   &:focus-visible {
     @apply outline-2 outline-offset-4 outline-ink;
+  }
+}
+
+@utility v-column-divider {
+  @variant lg {
+    &:not(:first-child)::before {
+      content: "";
+      position: absolute;
+      inset-inline-start: -2.03125rem;
+      top: 50%;
+      translate: 0 -50%;
+      width: 1px;
+      height: 4.6875rem;
+      background-color: var(--color-divider);
+    }
   }
 }

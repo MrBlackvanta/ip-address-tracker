@@ -21,7 +21,7 @@ export default function SearchForm() {
         autoComplete="off"
         spellCheck={false}
         placeholder="Search for any IP address or domain"
-        className="min-w-0 flex-1 pr-4 pl-6 text-field text-ink placeholder:text-muted focus-visible:outline-hidden"
+        className="min-w-0 flex-1 overflow-hidden pr-4 pl-6 text-field text-ellipsis text-ink placeholder:text-muted focus-visible:outline-hidden"
       />
       <button
         type="submit"
