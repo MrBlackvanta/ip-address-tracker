@@ -60,6 +60,10 @@
   }
 }
 
+.v-map .leaflet-control-attribution a {
+  text-decoration: underline;
+}
+
 .v-map .leaflet-bottom {
   bottom: 2rem;
 }

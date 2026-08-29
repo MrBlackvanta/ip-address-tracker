@@ -19,9 +19,7 @@ export default function DetailsCard() {
           {error}
         </p>
       ) : (
-        <dl
-          className={`grid gap-6 text-center transition-opacity duration-200 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-16.25 lg:gap-y-0 lg:text-left ${isPending ? "opacity-60" : ""}`}
-        >
+        <dl className="grid gap-6 text-center md:grid-cols-2 lg:grid-cols-4 lg:gap-x-16.25 lg:gap-y-0 lg:text-left">
           <DetailsItem label="IP Address" value={result?.ip ?? ""} />
           <DetailsItem
             label="Location"
