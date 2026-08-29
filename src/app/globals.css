@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@source not "../../*.md";
+
+@theme {
+  --color-ink: #2c2c2c;
+  --color-muted: #969696;
+}
+
+@theme inline {
+  --font-sans: var(--font-rubik);
+}
+
+@layer base {
+  body {
+    @apply font-sans text-ink;
+  }
+
+  a,
+  button {
+    @apply v-focus-ring;
+  }
+
+  button:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@utility v-focus-ring {
+  &:focus-visible {
+    @apply outline-2 outline-offset-4 outline-ink;
+  }
+}

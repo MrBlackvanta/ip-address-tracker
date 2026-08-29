@@ -1,0 +1,6 @@
+{
+  "name": "ip-address-tracker",
+  "compatibility_date": "2026-08-21",
+  "workers_dev": true,
+  "assets": { "directory": "./out", "not_found_handling": "404-page" }
+}

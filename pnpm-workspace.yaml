@@ -1,0 +1,6 @@
+packages:
+  - .
+onlyBuiltDependencies:
+  - sharp
+ignoredBuiltDependencies:
+  - unrs-resolver
