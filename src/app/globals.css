@@ -57,6 +57,16 @@
   }
 }
 
+.v-map .leaflet-bottom {
+  bottom: 2rem;
+}
+
+@media (width >= 48rem) {
+  .v-map .leaflet-bottom {
+    bottom: 0;
+  }
+}
+
 @utility v-column-divider {
   @variant lg {
     &:not(:first-child)::before {

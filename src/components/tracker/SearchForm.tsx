@@ -2,13 +2,23 @@
 
 import { ArrowIcon } from "@/components/icons";
 
+import { useTracker } from "./TrackerProvider";
+
 export default function SearchForm() {
+  const { lookup } = useTracker();
+
+  function handleSubmit(
+    event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>,
+  ) {
+    event.preventDefault();
+    const query = new FormData(event.currentTarget).get("q");
+    lookup(typeof query === "string" ? query.trim() : "");
+  }
+
   return (
     <form
       role="search"
-      onSubmit={(event: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) =>
-        event.preventDefault()
-      }
+      onSubmit={handleSubmit}
       className="relative mt-7.25 flex h-14.5 w-full max-w-138.75 overflow-hidden rounded-panel bg-white has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-4 has-[input:focus-visible]:outline-white lg:mt-7.75"
     >
       <label htmlFor="query" className="sr-only">

@@ -1,19 +1,13 @@
+"use client";
+
 import { formatLocation, formatTimezone } from "@/lib";
-import type { LookupResult } from "@/lib";
 
 import DetailsItem from "./DetailsItem";
+import { useTracker } from "./TrackerProvider";
 
-type DetailsCardProps = {
-  result: LookupResult | null;
-  error: string | null;
-  isPending: boolean;
-};
+export default function DetailsCard() {
+  const { result, error, isPending } = useTracker();
 
-export default function DetailsCard({
-  result,
-  error,
-  isPending,
-}: DetailsCardProps) {
   return (
     <section
       aria-label="Address details"
