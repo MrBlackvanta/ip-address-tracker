@@ -3,7 +3,32 @@
 
 @theme {
   --color-ink: #2c2c2c;
-  --color-muted: #969696;
+  --color-muted: #767676;
+  --color-divider: #d9d9d9;
+  --color-button: #000000;
+  --color-button-hover: #3f3f3f;
+  --color-banner-from: #5f86f2;
+  --color-banner-to: #443d97;
+
+  --text-title: 1.625rem;
+  --text-title--line-height: 1.875rem;
+  --text-title-lg: 2rem;
+  --text-title-lg--line-height: 1.875rem;
+  --text-value: 1.25rem;
+  --text-value--line-height: 1.5rem;
+  --text-value-lg: 1.625rem;
+  --text-value-lg--line-height: 1.875rem;
+  --text-label: 0.625rem;
+  --text-label--line-height: 0.75rem;
+  --text-label-lg: 0.75rem;
+  --text-label-lg--line-height: 0.875rem;
+  --text-field: 1.125rem;
+  --text-field--line-height: 1.3125rem;
+
+  --tracking-heading: -0.00893em;
+  --tracking-label: 0.14583em;
+
+  --radius-panel: 0.9375rem;
 }
 
 @theme inline {

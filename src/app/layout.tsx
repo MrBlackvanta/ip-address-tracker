@@ -59,7 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${rubik.variable} antialiased`}>
-      <body>{children}</body>
+      <body className="relative flex min-h-dvh flex-col bg-white">
+        {children}
+      </body>
     </html>
   );
 }

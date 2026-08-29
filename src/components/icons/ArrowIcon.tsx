@@ -3,7 +3,8 @@ import type { SVGProps } from "react";
 export default function ArrowIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
-      viewBox="0 0 11 14"
+      viewBox="0 0 10 14"
+      overflow="visible"
       fill="none"
       stroke="currentColor"
       strokeWidth={3}

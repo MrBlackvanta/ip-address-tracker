@@ -1,7 +1,13 @@
+import { HeaderBanner } from "@/components/layout";
+import { SearchForm } from "@/components/tracker";
+
 export default function Home() {
   return (
-    <main>
-      <h1>IP Address Tracker</h1>
-    </main>
+    <>
+      <HeaderBanner>
+        <SearchForm />
+      </HeaderBanner>
+      <main className="relative flex-1" />
+    </>
   );
 }
