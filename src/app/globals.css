@@ -30,6 +30,9 @@
   --tracking-label: 0.14583em;
 
   --radius-panel: 0.9375rem;
+
+  --shadow-panel: 0 50px 50px -25px rgb(0 0 0 / 0.1);
+  --shadow-banner: 0 2px 20px rgb(0 0 0 / 0.2);
 }
 
 @theme inline {

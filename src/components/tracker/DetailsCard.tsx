@@ -12,7 +12,7 @@ export default function DetailsCard() {
     <section
       aria-label="Address details"
       aria-busy={isPending}
-      className="mx-auto w-full max-w-277.5 rounded-panel bg-white px-6 pt-6.5 pb-6 lg:px-8 lg:pt-9.25 lg:pb-9"
+      className="mx-auto w-full max-w-277.5 rounded-panel bg-white px-6 pt-6.5 pb-6 shadow-panel lg:px-8 lg:pt-9.25 lg:pb-9"
     >
       {error ? (
         <p role="alert" className="text-center text-field text-error">

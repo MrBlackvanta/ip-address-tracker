@@ -5,7 +5,7 @@ import patternMobile from "@/assets/pattern-bg-mobile.webp";
 
 export default function HeaderBanner({ children }: { children: ReactNode }) {
   return (
-    <header className="relative flex h-75 flex-col items-center bg-linear-to-bl/srgb from-banner-from to-banner-to px-6 pt-6.5 lg:h-70 lg:pt-8.25">
+    <header className="relative z-10 flex h-75 flex-col items-center bg-linear-to-bl/srgb from-banner-from to-banner-to px-6 pt-6.5 shadow-banner lg:h-70 lg:pt-8.25">
       <picture className="contents">
         <source
           media="(min-width: 48rem)"

@@ -19,7 +19,7 @@ export default function SearchForm() {
     <form
       role="search"
       onSubmit={handleSubmit}
-      className="relative mt-7.25 flex h-14.5 w-full max-w-138.75 overflow-hidden rounded-panel bg-white has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-4 has-[input:focus-visible]:outline-white lg:mt-7.75"
+      className="relative mt-7.25 flex h-14.5 w-full max-w-138.75 overflow-hidden rounded-panel bg-white shadow-panel has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-4 has-[input:focus-visible]:outline-white lg:mt-7.75"
     >
       <label htmlFor="query" className="sr-only">
         IP address or domain
